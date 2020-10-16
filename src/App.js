@@ -10,9 +10,12 @@ import {
   CardContent,
   CardActions,
   Button,
+  Zoom,
+  CardActionArea,
 } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import Details from "./components/Details";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -21,7 +24,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
   },
   cardContainer: {
-    marginTop: theme.spacing(4),
+    padding: theme.spacing(3, 3, 2),
+    display: "grid",
+    gridTemplateColumns: "50% 50%",
   },
   cardMedia: {
     paddingTop: "80%",
@@ -29,11 +34,17 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
+  // list: {
+  //   gridColumn: "1 / 3",
+  // },
+  // details: {
+  //   gridColumn: "3 / 5",
+  // },
 }));
 
 function App() {
   const classes = useStyles();
-  const cards = [1, 2, 3, 4, 5, 6];
+  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
   return (
     <>
       {/*<AppBar position="fixed">*/}
@@ -53,27 +64,47 @@ function App() {
             </Typography>
           </Container>
         </div>
-        <Container className={classes.cardContainer} maxWidth="md">
-          <Grid container spacing={5}>
+        <Container className={classes.cardContainer} maxWidth="lg">
+          <Grid container spacing={7}>
             {cards.map((card) => {
               return (
-                <Grid item key={card} xs={12} sm={6} md={4}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      title="title"
-                      image="https://vignette.wikia.nocookie.net/sonicpokemon/images/7/77/Pikachu.png/revision/latest?cb=20200831092023"
-                    />
-                    <CardContent className={classes.cardContent}>
-                      content
-                    </CardContent>
-                    <CardActions>
-                      <Button>Button</Button>
-                    </CardActions>
-                  </Card>
+                <Grid item key={card}>
+                  <Zoom
+                    in={true}
+                    timeout={{
+                      enter: 500,
+                      exit: 1000,
+                    }}
+                  >
+                    <CardActionArea>
+                      <Card className={classes.card}>
+                        <CardMedia
+                          className={classes.cardMedia}
+                          title="title"
+                          image="https://vignette.wikia.nocookie.net/sonicpokemon/images/7/77/Pikachu.png/revision/latest?cb=20200831092023"
+                        />
+                        <CardContent className={classes.cardContent}>
+                          content, smth else
+                        </CardContent>
+                        <CardActions>
+                          <Button>Button</Button>
+                        </CardActions>
+                      </Card>
+                    </CardActionArea>
+                  </Zoom>
                 </Grid>
               );
             })}
+            <Grid item xs={12}>
+              <Button fullWidth variant="contained" color="primary">
+                Load More
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid
+            style={{ gridColumnStart: 2, gridColumnEnd: 3, padding: "20%" }}
+          >
+            <Details />
           </Grid>
         </Container>
       </main>
