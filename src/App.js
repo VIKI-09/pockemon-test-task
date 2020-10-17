@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Container,
@@ -16,6 +16,8 @@ import {
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Details from "./components/Details";
+import PokeCard from "./PokeCard";
+import { getPokemonList } from "./api";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -34,15 +36,20 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
-  // list: {
-  //   gridColumn: "1 / 3",
-  // },
-  // details: {
-  //   gridColumn: "3 / 5",
-  // },
 }));
 
 function App() {
+  const [listData, setListData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getPokemonList();
+      console.log(result);
+      setListData(result.data);
+    };
+    fetchData();
+  }, []);
+
   const classes = useStyles();
   const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
   return (
@@ -66,35 +73,13 @@ function App() {
         </div>
         <Container className={classes.cardContainer} maxWidth="lg">
           <Grid container spacing={7}>
-            {cards.map((card) => {
-              return (
-                <Grid item key={card}>
-                  <Zoom
-                    in={true}
-                    timeout={{
-                      enter: 500,
-                      exit: 1000,
-                    }}
-                  >
-                    <CardActionArea>
-                      <Card className={classes.card}>
-                        <CardMedia
-                          className={classes.cardMedia}
-                          title="title"
-                          image="https://vignette.wikia.nocookie.net/sonicpokemon/images/7/77/Pikachu.png/revision/latest?cb=20200831092023"
-                        />
-                        <CardContent className={classes.cardContent}>
-                          content, smth else
-                        </CardContent>
-                        <CardActions>
-                          <Button>Button</Button>
-                        </CardActions>
-                      </Card>
-                    </CardActionArea>
-                  </Zoom>
-                </Grid>
-              );
-            })}
+            {listData ? (
+              listData.results.map((item) => {
+                return <PokeCard itemData={item} />;
+              })
+            ) : (
+              <div> Loading...</div>
+            )}
             <Grid item xs={12}>
               <Button fullWidth variant="contained" color="primary">
                 Load More

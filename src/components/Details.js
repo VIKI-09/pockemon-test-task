@@ -31,7 +31,7 @@ function Details() {
         <CardMedia
           style={{ paddingTop: "60%" }}
           title="title"
-          image="https://vignette.wikia.nocookie.net/sonicpokemon/images/7/77/Pikachu.png/revision/latest?cb=20200831092023"
+          image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
         />
       </Container>
       <CardContent>
