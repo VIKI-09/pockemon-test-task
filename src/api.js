@@ -4,9 +4,6 @@ const PokedexAPI = axios.create({
   baseURL: "https://pokeapi.co/api/v2",
 });
 
-// export const getPokemonList = (offset = 0) =>
-//   PokedexAPI.get(`/pokemon?offset=${offset}&limit=12/`);
-
 export const getPokemonList = (urlNext) => {
   return urlNext
     ? PokedexAPI.get(urlNext)

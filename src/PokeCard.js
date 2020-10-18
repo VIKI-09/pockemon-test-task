@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Button,
   Card,
   CardActionArea,
   CardActions,
@@ -17,11 +16,6 @@ import { getPokemonInfo } from "./api";
 import { getTypeColor, replaceFirst } from "./utils";
 
 const useStyles = makeStyles((theme) => ({
-  cardContainer: {
-    padding: theme.spacing(3, 3, 2),
-    display: "grid",
-    gridTemplateColumns: "50% 50%",
-  },
   cardMedia: {
     paddingTop: "80%",
   },
@@ -53,7 +47,7 @@ function PokeCard({ itemData, handleClick }) {
       >
         {cardData ? (
           <CardActionArea onClick={() => handleClick(cardData.id)}>
-            <Card className={classes.card}>
+            <Card>
               <CardMedia
                 className={classes.cardMedia}
                 title="title"
