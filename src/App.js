@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, Suspense } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Container,
   Typography,
@@ -84,13 +84,17 @@ function App() {
         </div>
         {isLoading ? <LinearProgress /> : null}
         <Container className={classes.cardContainer} maxWidth="lg">
-          <Grid container direction="row" maxWidth={"lg"} spacing={3}>
+          <Grid container direction="row" spacing={3}>
             <Grid container item xs={12} sm={6} spacing={7}>
               {listData ? (
                 <>
                   {listData.results.map((item) => {
                     return (
-                      <PokeCard handleClick={onCardClick} itemData={item} />
+                      <PokeCard
+                        key={item.name}
+                        handleClick={onCardClick}
+                        itemData={item}
+                      />
                     );
                   })}
                   <Grid item xs={12}>

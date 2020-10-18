@@ -34,7 +34,7 @@ function PokeCard({ itemData, handleClick }) {
       setCardData(result.data);
     };
     fetchData();
-  }, []);
+  }, [itemData.url]);
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={4} key={itemData.name}>
@@ -64,7 +64,8 @@ function PokeCard({ itemData, handleClick }) {
                     <Chip
                       style={{ backgroundColor: getTypeColor(type.type.name) }}
                       label={replaceFirst(type.type.name)}
-                      small
+                      size="small"
+                      key={type.type.name}
                     />
                   );
                 })}
