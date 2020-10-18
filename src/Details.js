@@ -9,17 +9,10 @@ import {
   TableBody,
   Typography,
   Container,
+  CircularProgress,
 } from "@material-ui/core";
+import { replaceFirst } from "./utils";
 
-const rows = [
-  { property: "#property", value: "#points" },
-  { property: "#property", value: "#points" },
-  { property: "#property", value: "#points" },
-  { property: "#property", value: "#points" },
-];
-function replaceFirst(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 function Details({ data }) {
   return (
     <Card
@@ -29,10 +22,10 @@ function Details({ data }) {
         overflow: "inherit",
       }}
     >
-      <Container style={{ padding: "10px" }}>
+      <Container style={{ padding: "10%" }}>
         <CardMedia
-          style={{ paddingTop: "60%" }}
-          title="title"
+          style={{ paddingTop: "80%" }}
+          title={data.name}
           image={data.image}
         />
       </Container>
@@ -53,7 +46,7 @@ function Details({ data }) {
                 </TableRow>
               ))
             ) : (
-              <p>Loading...</p>
+              <CircularProgress />
             )}
           </TableBody>
         </Table>

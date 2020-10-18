@@ -9,60 +9,13 @@ import {
   Zoom,
   Chip,
   Typography,
+  CircularProgress,
 } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { getPokemonInfo } from "./api";
+import { getTypeColor, replaceFirst } from "./utils";
 
-function getTypeColor(typeName) {
-  switch (typeName) {
-    case "normal":
-      return "#19d3da";
-    case "fighting":
-      return "#7c3c21";
-    case "flying":
-      return "#b2ebf2";
-    case "poison":
-      return "#5c2a9d";
-    case "ground":
-      return "#7d5a5a";
-    case "rock":
-      return "#b49c73";
-    case "bug":
-      return "#8ccbbe";
-    case "ghost":
-      return "#89c9b8";
-    case "steel":
-      return "#8d93ab";
-    case "fire":
-      return "#bb2205";
-    case "water":
-      return "#51adcf";
-    case "grass":
-      return "#81b214";
-    case "electric":
-      return "#fddb3a";
-    case "psychic":
-      return "#c62a88";
-    case "ice":
-      return "#00bcd4";
-    case "dragon":
-      return "#f6830f";
-    case "dark":
-      return "#000000";
-    case "fairy":
-      return "#ffbcbc";
-    case "unknown":
-      return "#5e6f64";
-    case "shadow":
-      return "#363636";
-    default:
-  }
-}
-
-function replaceFirst(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
     padding: theme.spacing(3, 3, 2),
@@ -90,7 +43,7 @@ function PokeCard({ itemData, handleClick }) {
   }, []);
 
   return (
-    <Grid item sm={4} key={itemData.name}>
+    <Grid item xs={12} sm={6} md={4} lg={4} key={itemData.name}>
       <Zoom
         in={true}
         timeout={{
@@ -125,7 +78,7 @@ function PokeCard({ itemData, handleClick }) {
             </Card>
           </CardActionArea>
         ) : (
-          <p>Loading...</p>
+          <CircularProgress />
         )}
       </Zoom>
     </Grid>
