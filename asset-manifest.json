@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/pockemon-test-task/static/css/main.69eda509.chunk.css",
+    "main.js": "/pockemon-test-task/static/js/main.1cb09d8b.chunk.js",
+    "main.js.map": "/pockemon-test-task/static/js/main.1cb09d8b.chunk.js.map",
+    "runtime-main.js": "/pockemon-test-task/static/js/runtime-main.92e98f10.js",
+    "runtime-main.js.map": "/pockemon-test-task/static/js/runtime-main.92e98f10.js.map",
+    "static/js/2.fc004ee0.chunk.js": "/pockemon-test-task/static/js/2.fc004ee0.chunk.js",
+    "static/js/2.fc004ee0.chunk.js.map": "/pockemon-test-task/static/js/2.fc004ee0.chunk.js.map",
+    "index.html": "/pockemon-test-task/index.html",
+    "precache-manifest.6da8ad8daaf018ddfa463f8809800202.js": "/pockemon-test-task/precache-manifest.6da8ad8daaf018ddfa463f8809800202.js",
+    "service-worker.js": "/pockemon-test-task/service-worker.js",
+    "static/css/main.69eda509.chunk.css.map": "/pockemon-test-task/static/css/main.69eda509.chunk.css.map",
+    "static/js/2.fc004ee0.chunk.js.LICENSE.txt": "/pockemon-test-task/static/js/2.fc004ee0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.92e98f10.js",
+    "static/js/2.fc004ee0.chunk.js",
+    "static/css/main.69eda509.chunk.css",
+    "static/js/main.1cb09d8b.chunk.js"
+  ]
+}
