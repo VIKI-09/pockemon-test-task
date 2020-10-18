@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PokeCard({ itemData }) {
+function PokeCard({ itemData, handleClick }) {
   const classes = useStyles();
   const [cardData, setCardData] = useState(null);
   useEffect(() => {
@@ -99,7 +99,7 @@ function PokeCard({ itemData }) {
         }}
       >
         {cardData ? (
-          <CardActionArea>
+          <CardActionArea onClick={() => handleClick(cardData.id)}>
             <Card className={classes.card}>
               <CardMedia
                 className={classes.cardMedia}

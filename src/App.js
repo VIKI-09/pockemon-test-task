@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   AppBar,
   Container,
@@ -17,7 +17,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Details from "./components/Details";
 import PokeCard from "./PokeCard";
-import { getPokemonList } from "./api";
+import { getPokemonList, getPokemonInfo } from "./api";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -40,18 +40,48 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const [listData, setListData] = useState(null);
-
+  const [detailsCard, setDetailsCard] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const result = await getPokemonList();
-      console.log(result);
+
       setListData(result.data);
     };
     fetchData();
   }, []);
 
+  function createTableData(data) {
+    const result = {
+      table: [],
+      name: null,
+      image: null,
+    };
+    data.stats.map((item) => {
+      result.table.push({ property: item.stat.name, value: item.base_stat });
+    });
+    result.table.push({ property: "weight", value: data.weight });
+    result.image = data.sprites.front_default;
+    result.name = data.name;
+    return result;
+  }
+
+  const onCardClick = useCallback(async (id) => {
+    const result = await getPokemonInfo(id);
+    console.log(result.data);
+    setDetailsCard(createTableData(result.data));
+  }, []);
+  const loadMoreHandler = useCallback(async () => {
+    const result = await getPokemonList(listData.next);
+    console.log(result);
+    setListData((prevState) => {
+      const newState = result.data;
+
+      newState.results = prevState.results.concat(newState.results);
+      return newState;
+    });
+  }, [listData]);
   const classes = useStyles();
-  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+
   return (
     <>
       {/*<AppBar position="fixed">*/}
@@ -75,13 +105,18 @@ function App() {
           <Grid container spacing={7}>
             {listData ? (
               listData.results.map((item) => {
-                return <PokeCard itemData={item} />;
+                return <PokeCard handleClick={onCardClick} itemData={item} />;
               })
             ) : (
               <div> Loading...</div>
             )}
             <Grid item xs={12}>
-              <Button fullWidth variant="contained" color="primary">
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={loadMoreHandler}
+              >
                 Load More
               </Button>
             </Grid>
@@ -89,7 +124,7 @@ function App() {
           <Grid
             style={{ gridColumnStart: 2, gridColumnEnd: 3, padding: "20%" }}
           >
-            <Details />
+            {detailsCard ? <Details data={detailsCard} /> : null}
           </Grid>
         </Container>
       </main>

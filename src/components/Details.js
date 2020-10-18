@@ -17,7 +17,10 @@ const rows = [
   { property: "#property", value: "#points" },
   { property: "#property", value: "#points" },
 ];
-function Details() {
+function replaceFirst(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+function Details({ data }) {
   return (
     <Card
       style={{
@@ -26,27 +29,32 @@ function Details() {
         overflow: "inherit",
       }}
     >
-      {" "}
       <Container style={{ padding: "10px" }}>
         <CardMedia
           style={{ paddingTop: "60%" }}
           title="title"
-          image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+          image={data.image}
         />
       </Container>
       <CardContent>
-        <Typography>#NAME</Typography>
+        <Typography variant="h4" align="center">
+          {replaceFirst(data.name)}
+        </Typography>
 
         <Table>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow>
-                <TableCell component="th" scope="row" key={row.property}>
-                  {row.property}
-                </TableCell>
-                <TableCell align="right">{row.value}</TableCell>
-              </TableRow>
-            ))}
+            {data ? (
+              data.table.map((row) => (
+                <TableRow>
+                  <TableCell component="th" scope="row" key={row.property}>
+                    {replaceFirst(row.property)}
+                  </TableCell>
+                  <TableCell align="right">{row.value}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
           </TableBody>
         </Table>
       </CardContent>
